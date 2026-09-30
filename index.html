@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steevliet vzw | Opleidingsbeheer & Werkstromen</title>
+  <meta name="description" content="Digitaal Opleidingsbeheer voor Steevliet vzw. Presentatiedia's en productie-rijp Blazor WASM portaal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="mode-slides">
+
+  <!-- ================================================================= -->
+  <!-- VIEW A: PRESENTATIE (FULLSCREEN UNIFORM DIA'S - SIMPEL & KRACHTIG) -->
+  <!-- ================================================================= -->
+  <main id="view-slides-mode" class="deck-screen active">
+
+    <!-- Clean Floating Navigation in Presentation Mode -->
+    <header class="deck-floating-nav">
+      <div class="deck-brand-text">
+        <strong class="brand-title-text">Steevliet <span class="brand-tag-simple">vzw</span></strong>
+        <span class="brand-sub-text">Opleidingsbeheer & Werkstromen</span>
+      </div>
+
+      <div class="deck-nav-actions">
+        <!-- Single Fullscreen Toggle Button (No Duplicates) -->
+        <button id="btn-toggle-fs" class="btn-deck-tool" onclick="toggleFullscreen()">
+          <svg id="icon-fs-enter" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          <svg id="icon-fs-exit" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><path d="M4 14h6v6m10-10h-6V4m0 6l7-7M10 14l-7 7"/></svg>
+          <span id="txt-fs-label">Volledig Scherm</span>
+        </button>
+
+        <button class="btn-deck-primary" onclick="switchToWebapp()">
+          <span>Open Webapplicatie</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Slide Stage: Equal Fixed Dimensions Across All Slides -->
+    <div class="deck-canvas-wrapper">
+      <div class="slide-canvas" id="slide-canvas">
+
+        <!-- SLIDE 1: INTRODUCTIE & DOEL GESPREK -->
+        <article class="slide-card active" data-slide="1">
+          <div class="slide-inner slide-center">
+            <span class="deck-pill">Klantgesprek Steevliet vzw</span>
+            <h1 class="deck-headline">Van administratieve ruis naar <span class="serif-title">overzicht en rust</span>.</h1>
+            <p class="deck-sublead">
+              Een eenvoudig opleidingsbeheer voor de bijzondere jeugdzorg. Zonder technische IT-termen, maar met een heldere stroom die <strong>Els</strong> en <strong>Ines</strong> uren tijd bespaart en medewerkers direct duidelijkheid biedt.
+            </p>
+
+            <div class="deck-flow-strip">
+              <div class="flow-pill-step">Catalogus per Functiegroep</div>
+              <span class="flow-chevron">➔</span>
+              <div class="flow-pill-step">1-Klik Aanvraag</div>
+              <span class="flow-chevron">➔</span>
+              <div class="flow-pill-step">Coördinator Akkoord</div>
+              <span class="flow-chevron">➔</span>
+              <div class="flow-pill-step highlight">Automatische Looncode</div>
+              <span class="flow-chevron">➔</span>
+              <div class="flow-pill-step">Pre-Payroll Export</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SLIDE 2: AS-IS FLOW (HUIDIGE SITUATIE) -->
+        <article class="slide-card" data-slide="2">
+          <div class="slide-inner">
+            <div class="deck-card-head">
+              <span class="deck-pill pill-danger">Huidig Proces (AS-IS)</span>
+              <h2>Waar vandaag kostbare tijd verloren gaat</h2>
+              <p>De e-mailketens en manuele overtik-stroom die we in jullie briefing hebben geanalyseerd:</p>
+            </div>
+
+            <div class="flow-stage as-is-stage">
+              <div class="flow-node node-bad">
+                <span class="node-idx">01</span>
+                <h4>Zoeken & Vragen</h4>
+                <p>Medewerker zoekt zelf online of in losse lijst van Els.</p>
+              </div>
+
+              <div class="flow-connector bad">
+                <span class="c-tag">Mail sturen</span>
+                <span class="c-head">➔</span>
+              </div>
+
+              <div class="flow-node node-bad">
+                <span class="node-idx">02</span>
+                <h4>Coördinator</h4>
+                <p>Moet per e-mail akkoord geven en doorsturen.</p>
+              </div>
+
+              <div class="flow-connector bad">
+                <span class="c-tag">Mailketen</span>
+                <span class="c-head">➔</span>
+              </div>
+
+              <div class="flow-node node-bad">
+                <span class="node-idx">03</span>
+                <h4>Ines in Excel</h4>
+                <p>Handmatig overtikken in de centrale opvolglijst.</p>
+              </div>
+
+              <div class="flow-connector bad">
+                <span class="c-tag">Loonronde</span>
+                <span class="c-head">➔</span>
+              </div>
+
+              <div class="flow-node node-bad alert-border">
+                <span class="node-idx">04</span>
+                <h4>Tijdpuzzel</h4>
+                <p>Binnen of buiten dienst? Looncode manueel invoeren.</p>
+              </div>
+            </div>
+
+            <div class="deck-notes-strip bad-strip">
+              <div><strong>E-mail lawine:</strong> Aanvragen blijven hangen in mailboxen; niemand heeft het realtime overzicht.</div>
+              <div><strong>Overtikwerk in Excel:</strong> Ines moet gegevens handmatig kopiëren en opvolgen.</div>
+              <div><strong>Looncode risico:</strong> Binnen of buiten werkrooster (overuren/recup) moet manueel berekend worden.</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SLIDE 3: TO-BE FLOWS PER TYPE -->
+        <article class="slide-card" data-slide="3">
+          <div class="slide-inner">
+            <div class="deck-card-head">
+              <span class="deck-pill pill-success">Gewenste Werkstromen (TO-BE)</span>
+              <h2>Werkstroom per Type Opleiding</h2>
+              <p>Duidelijke, geautomatiseerde stromen voor zowel interne campussen als externe vormingen:</p>
+            </div>
+
+            <div class="type-workflows-container">
+              
+              <!-- TYPE 1: INTERNE OPLEIDING -->
+              <div class="workflow-track-box">
+                <div class="wt-badge-header">
+                  <span class="wt-badge wt-badge-internal">Type 1 • Interne Opleiding (Campussen Melle / Oudenhove)</span>
+                </div>
+                <div class="wt-steps-row">
+                  <div class="wt-step-node">
+                    <span class="wt-step-num">01</span>
+                    <strong>Catalogus</strong>
+                    <span>Els plant intern aanbod</span>
+                  </div>
+                  <span class="wt-arrow">➔</span>
+                  <div class="wt-step-node">
+                    <span class="wt-step-num">02</span>
+                    <strong>1-Klik Aanvraag</strong>
+                    <span>Medewerker kiest shift/lunch</span>
+                  </div>
+                  <span class="wt-arrow">➔</span>
+                  <div class="wt-step-node">
+                    <span class="wt-step-num">03</span>
+                    <strong>Akkoord</strong>
+                    <span>Coördinator fiatteert</span>
+                  </div>
+                  <span class="wt-arrow">➔</span>
+                  <div class="wt-step-node">
+                    <span class="wt-step-num">04</span>
+                    <strong>Zaal & Broodjes</strong>
+                    <span>Automatische bestellijst</span>
+                  </div>
+                  <span class="wt-arrow">➔</span>
+                  <div class="wt-step-node wt-step-done">
+                    <span class="wt-step-num">05</span>
+                    <strong>Pre-Payroll</strong>
+                    <span>LC-101 of LC-204 voor Ines</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TYPE 2: EXTERNE VORMING -->
+              <div class="workflow-track-box">
+                <div class="wt-badge-header">
+                  <span class="wt-badge wt-badge-external">Type 2 • Externe Vorming (Open markt / Externe partner)</span>
+                </div>
+                <div class="wt-steps-row">
+                  <div class="wt-step-node">
+                    <span class="wt-step-num">01</span>
+                    <strong>Voorstel Indienen</strong>
+                    <span>Medewerker stelt cursus voor</span>
+                  </div>
+                  <span class="wt-arrow">➔</span>
+                  <div class="wt-step-node">
+                    <span class="wt-step-num">02</span>
+                    <strong>Validatie</strong>
+                    <span>Coördinator/Els checkt nut & budget</span>
+                  </div>
+                  <span class="wt-arrow">➔</span>
+                  <div class="wt-step-node">
+                    <span class="wt-step-num">03</span>
+                    <strong>Inschrijving</strong>
+                    <span>Bevestiging & facturatie</span>
+                  </div>
+                  <span class="wt-arrow">➔</span>
+                  <div class="wt-step-node">
+                    <span class="wt-step-num">04</span>
+                    <strong>Evaluatie</strong>
+                    <span>Kwaliteitsscore externe partner</span>
+                  </div>
+                  <span class="wt-arrow">➔</span>
+                  <div class="wt-step-node wt-step-done">
+                    <span class="wt-step-num">05</span>
+                    <strong>Pre-Payroll</strong>
+                    <span>LC-101 of LC-204 voor Ines</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ROOSTERVERWERKING ONDERAAN -->
+            <div class="rooster-impact-strip">
+              <div class="ri-col">
+                <div class="ri-pill ri-pill-binnen">Roosterstroom A: Binnen werkrooster</div>
+                <p>Leefgroepbezetting gewaarborgd ➔ <strong>Looncode LC-101</strong> (Normale diensturen)</p>
+              </div>
+              <div class="ri-divider"></div>
+              <div class="ri-col">
+                <div class="ri-pill ri-pill-buiten">Roosterstroom B: Buiten werkrooster</div>
+                <p>Vrije dag of weekend; geen vervanging nodig ➔ <strong>Looncode LC-204</strong> (Overuren / Recup)</p>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- SLIDE 4: PRODUCT BACKLOG & PRIORITEITEN (MOSCOW) -->
+        <article class="slide-card" data-slide="4">
+          <div class="slide-inner">
+            <div class="deck-card-head">
+              <span class="deck-pill">Scope & Prioriteiten</span>
+              <h2>Product Backlog & Afbakening (MoSCoW)</h2>
+              <p>Om een werkend, kwalitatief systeem op te leveren, bewaken we samen de focus:</p>
+            </div>
+
+            <div class="scope-columns-layout">
+              <div class="scope-col col-must">
+                <div class="sc-head">
+                  <span class="sc-pill pill-must">Fase 1 • Must Haves</span>
+                  <h3>Direct Werkend Opleverbaar</h3>
+                </div>
+                <ul class="sc-list">
+                  <li>Catalogus met functiegroepen (Pedagogisch, Logistiek, Admin)</li>
+                  <li>Aanvraagformulier met 'binnen/buiten dienst' keuze</li>
+                  <li>1-klik goedkeuringsflow voor teamcoördinatoren</li>
+                  <li>Centraal beheeroverzicht voor Ines & Els (vervangt Excel)</li>
+                  <li>Automatische looncode toekenning (LC-101 vs LC-204)</li>
+                  <li>Korte 1-minuut evaluatie na afloop</li>
+                </ul>
+              </div>
+
+              <div class="scope-col col-should">
+                <div class="sc-head">
+                  <span class="sc-pill pill-should">Fase 2 • Should Haves</span>
+                  <h3>Extra Efficiëntie</h3>
+                </div>
+                <ul class="sc-list">
+                  <li>Automatische e-mailnotificaties bij goedkeuring</li>
+                  <li>Zaalbezetting & broodjesbestellijst Campus Melle/Zottegem</li>
+                  <li>CSV-exportbestand geformatteerd voor tijdregistratie</li>
+                  <li>Kwaliteitsclassificatie van externe opleiders</li>
+                </ul>
+              </div>
+
+              <div class="scope-col col-wont">
+                <div class="sc-head">
+                  <span class="sc-pill pill-wont">Buiten Scope</span>
+                  <h3>Niet in deze fase</h3>
+                </div>
+                <ul class="sc-list">
+                  <li>Rechtstreekse live API met sociaal secretariaat (CSV export volstaat en bespaart dure licenties)</li>
+                  <li>Algemene verlof- of ziekteplanning van personeel</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SLIDE 5: ROADMAP & FASERING -->
+        <article class="slide-card" data-slide="5">
+          <div class="slide-inner">
+            <div class="deck-card-head">
+              <span class="deck-pill">Projectplanning</span>
+              <h2>Project Roadmap & Fasering</h2>
+              <p>Stapsgewijze ontwikkeling met regelmatige afstemming en tussentijdse demo's:</p>
+            </div>
+
+            <div class="roadmap-timeline-grid">
+              <div class="timeline-phase-card active-phase">
+                <div class="tp-badge">Sprint 1</div>
+                <h4>Catalogus & Aanvragen</h4>
+                <p>Opleidingsaanbod per functiegroep, filtering en het 1-klik aanvraagformulier voor medewerkers.</p>
+                <span class="tp-deliverable">Oplevering: Basis Catalogus</span>
+              </div>
+
+              <div class="timeline-phase-card">
+                <div class="tp-badge">Sprint 2</div>
+                <h4>Goedkeuring & Register</h4>
+                <p>Dashboard voor coördinatoren om aanvragen te beoordelen en centraal beheeroverzicht.</p>
+                <span class="tp-deliverable">Oplevering: Goedkeuringsflow</span>
+              </div>
+
+              <div class="timeline-phase-card highlight-phase">
+                <div class="tp-badge tp-badge-acc">Sprint 3</div>
+                <h4>Looncodes & Tijdregistratie</h4>
+                <p>Automatische berekening binnen/buiten dienst (LC-101 / LC-204) en CSV exportbestand voor Ines.</p>
+                <span class="tp-deliverable">Oplevering: Pre-Payroll Export</span>
+              </div>
+
+              <div class="timeline-phase-card">
+                <div class="tp-badge">Sprint 4</div>
+                <h4>Zalen, Catering & Evaluaties</h4>
+                <p>Broodjeslijsten per campus, zaalreservering en 1-minuut evaluaties met kwaliteitsranking.</p>
+                <span class="tp-deliverable">Oplevering: Volledig Portaal</span>
+              </div>
+            </div>
+
+            <div class="deck-notes-strip good-strip">
+              <div><strong>Vroegtijdige feedback:</strong> Na elke sprint testen we samen met Els en Ines.</div>
+              <div><strong>Beheersbare risico's:</strong> Geen 'big bang' op het einde, maar continu werkende tussenversies.</div>
+              <div><strong>Duidelijke afspraken:</strong> De scope blijft te allen tijde bewaakt.</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SLIDE 6: ONZE VRAGEN VOOR STEEVLIET -->
+        <article class="slide-card" data-slide="6">
+          <div class="slide-inner">
+            <div class="deck-card-head">
+              <span class="deck-pill">Informatie Verzamelen</span>
+              <h2>Kernvragen voor Steevliet</h2>
+              <p>Belangrijke punten om tijdens het gesprek samen te verduidelijken:</p>
+            </div>
+
+            <div class="questions-clean-grid">
+              <div class="q-clean-card">
+                <div class="q-icon-num">1</div>
+                <div class="q-content">
+                  <h4>Import in Tijdregistratie</h4>
+                  <p>Kan Ines een exportbestand (CSV/Excel) rechtstreeks inlezen in jullie tijdregistratiesysteem, of moeten alle uren momenteel manueel worden overtikt?</p>
+                </div>
+              </div>
+
+              <div class="q-clean-card">
+                <div class="q-icon-num">2</div>
+                <div class="q-content">
+                  <h4>Shiften & Weekendtoeslagen</h4>
+                  <p>Zijn er bij vormingen in het weekend of 's avonds nog specifieke extra toeslagen (zoals weekendpremie of verplaatsingsvergoeding) die automatisch moeten worden berekend?</p>
+                </div>
+              </div>
+
+              <div class="q-clean-card">
+                <div class="q-icon-num">3</div>
+                <div class="q-content">
+                  <h4>Goedkeuringsbevoegdheid</h4>
+                  <p>Is goedkeuring van de teamcoördinator altijd voldoende, of is bij duurdere externe vormingen ook een handtekening van de directie vereist?</p>
+                </div>
+              </div>
+
+              <div class="q-clean-card">
+                <div class="q-icon-num">4</div>
+                <div class="q-content">
+                  <h4>Attesten & Herhalingsopleidingen</h4>
+                  <p>Moeten certificaten met een vervaldatum (zoals EHBO of HACCP) automatisch worden opgevolgd zodat Els tijdig herhalingscursussen kan inplannen?</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Bar to Webapp -->
+            <div class="deck-footer-cta">
+              <div class="cta-text-left">
+                <strong>Klaar om de werkstroom live te ervaren?</strong>
+                <span>We hebben een interactieve Blazor-preview klaargezet waarin we alle rollen kunnen doorlopen.</span>
+              </div>
+              <button class="btn btn-primary btn-large" onclick="switchToWebapp()">
+                <span>Start Webapplicatie Preview</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Bottom Deck Controls -->
+    <footer class="deck-dock">
+      <button class="deck-dock-btn" onclick="prevSlide()" id="btn-prev-slide" title="Vorige dia (Pijltje links)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        <span>Vorige</span>
+      </button>
+
+      <div class="deck-dots" id="deck-dots"></div>
+
+      <div class="deck-counter" id="slide-counter">Dia 1 van 6</div>
+
+      <button class="deck-dock-btn" onclick="nextSlide()" id="btn-next-slide" title="Volgende dia (Pijltje rechts)">
+        <span>Volgende</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </footer>
+
+  </main>
+
+
+  <!-- ================================================================= -->
+  <!-- VIEW B: INTERACTIEVE WEBAPPLICATIE (ROL-GEBASEERD SPA)            -->
+  <!-- ================================================================= -->
+  <main id="view-webapp-mode" class="app-viewport">
+    
+    <!-- Clean, Focused Sidebar with Role-Based Navigation -->
+    <aside class="app-sidebar" id="app-sidebar">
+      
+      <!-- Typography-only Brand (No S Icon) -->
+      <div class="sidebar-brand-clean">
+        <strong class="brand-name">Steevliet <span class="brand-tag-simple">vzw</span></strong>
+        <span class="brand-tagline">Opleidingsbeheer</span>
+      </div>
+
+      <!-- Navigation Container (Dynamically updated per user role) -->
+      <nav class="sidebar-nav" id="sidebar-nav">
+        <!-- Rendered by JS based on active role -->
+      </nav>
+
+      <!-- Bottom User Context & Collapsible Role Selector -->
+      <div class="sidebar-bottom-user">
+        
+        <!-- Collapsible Menu -->
+        <div class="user-role-popover" id="user-role-popover">
+          <div class="popover-header">
+            <span>Simuleer als Gebruiker</span>
+          </div>
+          <div class="popover-list">
+            <button class="popover-item active" data-role="medewerker" onclick="selectUserRole('medewerker')">
+              <span class="item-avatar">T</span>
+              <div class="item-text">
+                <strong>Tom De Smet</strong>
+                <span>Pedagogisch Begeleider (Medewerker)</span>
+              </div>
+              <span class="check-icon">✓</span>
+            </button>
+
+            <button class="popover-item" data-role="coordinator" onclick="selectUserRole('coordinator')">
+              <span class="item-avatar">S</span>
+              <div class="item-text">
+                <strong>Sarah Claeys</strong>
+                <span>Teamcoördinator Leefgroepen</span>
+              </div>
+              <span class="check-icon">✓</span>
+            </button>
+
+            <button class="popover-item" data-role="ines" onclick="selectUserRole('ines')">
+              <span class="item-avatar">I</span>
+              <div class="item-text">
+                <strong>Ines Van Damme</strong>
+                <span>HR & Loonadministratie</span>
+              </div>
+              <span class="check-icon">✓</span>
+            </button>
+
+            <button class="popover-item" data-role="els" onclick="selectUserRole('els')">
+              <span class="item-avatar">E</span>
+              <div class="item-text">
+                <strong>Els Martens</strong>
+                <span>Opleidingsverantwoordelijke</span>
+              </div>
+              <span class="check-icon">✓</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- The Trigger Button at bottom of sidebar -->
+        <button class="user-profile-trigger" id="user-profile-trigger" onclick="toggleUserRolePopover()">
+          <div class="avatar-circle" id="sidebar-user-avatar">T</div>
+          <div class="trigger-info">
+            <strong id="sidebar-user-name">Tom De Smet</strong>
+            <span id="sidebar-user-dept">Pedagogisch Begeleider</span>
+          </div>
+          <svg class="chevron-up" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- Main Application Canvas -->
+    <div class="app-workspace">
+      
+      <!-- Clean Top Bar -->
+      <header class="workspace-header">
+        <div class="header-module-info">
+          <h2 id="current-module-title">Opleidingen</h2>
+          <span class="module-subtitle" id="current-module-sub">Blader door het aanbod en dien een aanvraag in</span>
+        </div>
+
+        <div class="workspace-actions" id="workspace-actions">
+          <!-- Dynamically populated or clean action buttons -->
+        </div>
+      </header>
+
+      <!-- Workspace Body Panes -->
+      <div class="workspace-body">
+
+        <!-- ================= MODULE 1: CATALOGUS ================= -->
+        <section id="module-catalog" class="module-pane active">
+          
+          <div class="filter-strip">
+            <div class="pill-group">
+              <button class="filter-btn active" onclick="filterCatalog('all', this)">Alle (5)</button>
+              <button class="filter-btn" onclick="filterCatalog('pedagogisch', this)">Pedagogisch (3)</button>
+              <button class="filter-btn" onclick="filterCatalog('logistiek', this)">Logistiek & Keuken (1)</button>
+              <button class="filter-btn" onclick="filterCatalog('admin', this)">Administratie (1)</button>
+            </div>
+
+            <div class="search-box">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="global-search-input" placeholder="Zoek op titel of partner..." onkeyup="onSearchCourses()">
+            </div>
+          </div>
+
+          <!-- Courses Grid -->
+          <div class="clean-cards-grid" id="courses-grid-container">
+            <!-- Rendered by JS -->
+          </div>
+
+        </section>
+
+
+        <!-- ================= MODULE 2: MIJN AANVRAGEN (TOM) ================= -->
+        <section id="module-my-requests" class="module-pane">
+          
+          <div class="section-top-status">
+            <p class="text-secondary">Overzicht van jouw ingediende opleidingsaanvragen en de realtime status van goedkeuring.</p>
+            <button class="btn btn-secondary" onclick="openModal('sheet-suggest')">+ Externe Vorming Voorstellen</button>
+          </div>
+
+          <div class="clean-cards-grid" id="my-requests-container">
+            <!-- Rendered by JS -->
+          </div>
+
+        </section>
+
+
+        <!-- ================= MODULE 3: GOEDKEURINGEN (SARAH) ================= -->
+        <section id="module-approvals" class="module-pane">
+          
+          <div class="section-top-status">
+            <p class="text-secondary">Aanvragen van medewerkers uit jouw leefgroepen die wachten op akkoord. Na akkoord worden de uren direct klaarzet voor Ines (HR).</p>
+            <span class="badge-pending-large" id="approvals-counter-tag">2 Aanvragen wachten op akkoord</span>
+          </div>
+
+          <div class="approval-cards-list" id="approvals-cards-container">
+            <!-- Rendered by JS as clear, large action cards -->
+          </div>
+
+        </section>
+
+
+        <!-- ================= MODULE 4: TEAM OVERZICHT (SARAH) ================= -->
+        <section id="module-team" class="module-pane">
+          
+          <div class="section-top-status">
+            <p class="text-secondary">Opleidingstrajecten en bezetting van teamleden in Leefgroep De Eik en De Berk.</p>
+            <span class="badge-tag-ines">Campus Melle</span>
+          </div>
+
+          <div class="clean-table-card">
+            <table class="payroll-table">
+              <thead>
+                <tr>
+                  <th>Medewerker</th>
+                  <th>Leefgroep</th>
+                  <th>Gevolgde Vorming</th>
+                  <th>Uren</th>
+                  <th>Periode</th>
+                  <th>Bezetting Leefgroep</th>
+                </tr>
+              </thead>
+              <tbody id="team-table-body">
+                <tr>
+                  <td><strong>Tom De Smet</strong></td>
+                  <td>Leefgroep De Eik</td>
+                  <td>Omgaan met Weerstand & De-escalatie</td>
+                  <td>8 uren</td>
+                  <td>18 Okt 2026</td>
+                  <td><span class="badge-status badge-done">Vervanging Voorzien</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Anja Peeters</strong></td>
+                  <td>Leefgroep De Berk</td>
+                  <td>Vroegdetectie Suïcidaal Gedrag</td>
+                  <td>6 uren</td>
+                  <td>22 Okt 2026</td>
+                  <td><span class="badge-status badge-done">Binnen Dienst</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Klaas Martens</strong></td>
+                  <td>Leefgroep De Eik</td>
+                  <td>Levensreddend Handelen & EHBO</td>
+                  <td>4 uren</td>
+                  <td>Voltooid</td>
+                  <td><span class="badge-status badge-done">Geregeld</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+
+        <!-- ================= MODULE 5: LOONCODES & TIJD (INES) ================= -->
+        <section id="module-payroll" class="module-pane">
+          
+          <div class="payroll-summary-bar">
+            <div>
+              <h3>Pre-Payroll Overzicht voor Tijdregistratie</h3>
+              <p class="text-secondary">Automatisch berekend op basis van gewerkte shiften (LC-101 binnen dienst vs LC-204 overuren/recup).</p>
+            </div>
+            <button class="btn btn-primary" onclick="exportPayrollCSV()">
+              <span>📥 Download CSV voor Tijdregistratie</span>
+            </button>
+          </div>
+
+          <div class="clean-table-card">
+            <table class="payroll-table">
+              <thead>
+                <tr>
+                  <th>Medewerker</th>
+                  <th>Leefgroep / Dienst</th>
+                  <th>Gevolgde Opleiding</th>
+                  <th>Duur</th>
+                  <th>Rooster Situatie</th>
+                  <th>Looncode</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="payroll-table-body">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+
+        <!-- ================= MODULE 6: ZALEN & BROODJES (ELS) ================= -->
+        <section id="module-logistics" class="module-pane">
+          
+          <div class="payroll-summary-bar">
+            <div>
+              <h3>Zaalbezetting & Broodjesbestellingen per Campus</h3>
+              <p class="text-secondary">Automatisch gegenereerde bestellijsten voor bakkerij en lokale facilitair medewerkers.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-secondary" onclick="window.print()">
+                <span>🖨️ Afdrukken</span>
+              </button>
+              <button class="btn btn-primary" onclick="exportCateringCSV()">
+                <span>📥 Download Bestelbon Bakkerij (CSV)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Campus Selector Tabs -->
+          <div class="filter-strip" style="margin-bottom: 1rem;">
+            <div class="pill-group">
+              <button class="filter-btn active" id="btn-campus-melle" onclick="switchCampusView('melle', this)">Campus Melle • Vrijdag 18 Okt (12 pers)</button>
+              <button class="filter-btn" id="btn-campus-oudenhove" onclick="switchCampusView('oudenhove', this)">Campus Oudenhove • Donderdag 22 Okt (8 pers)</button>
+            </div>
+          </div>
+
+          <!-- Active Campus Summary Box -->
+          <div class="campus-summary-strip" id="campus-summary-strip">
+            <div class="cs-item">
+              <span class="cs-label">Zaalreservatie</span>
+              <strong id="cs-zaal">Zaal De Berk (09:00 - 17:00)</strong>
+              <span class="text-muted" id="cs-zaal-setup">U-vorm voor 12 personen • Beamer & Flipchart</span>
+            </div>
+            <div class="cs-divider"></div>
+            <div class="cs-item">
+              <span class="cs-label">Catering Totalen</span>
+              <strong id="cs-totals">8x Vlees/Kaas • 4x Vegetarisch</strong>
+              <span class="text-muted" id="cs-delivery">Levering om 12:15 door Bakkerij De Baere (Melle)</span>
+            </div>
+            <div class="cs-divider"></div>
+            <div class="cs-item">
+              <span class="cs-label">Opleiding & Partner</span>
+              <strong id="cs-course">Omgaan met Weerstand (Pimento vzw)</strong>
+              <span class="text-muted">12 Deelnemers van 3 leefgroepen</span>
+            </div>
+          </div>
+
+          <!-- Visible Broodjeslijst Table -->
+          <div class="clean-table-card" style="margin-top: 1.25rem;">
+            <table class="payroll-table">
+              <thead>
+                <tr>
+                  <th>Medewerker</th>
+                  <th>Leefgroep / Dienst</th>
+                  <th>Gekozen Broodje</th>
+                  <th>Dieet / Speciale Wensen</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="catering-table-body">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+
+        <!-- ================= MODULE 7: EVALUATIES & PARTNERS ================= -->
+        <section id="module-evaluations" class="module-pane">
+          
+          <div class="eval-dashboard-grid">
+            
+            <!-- Left: Kwaliteitsranking per Opleiding & Partner (Els) -->
+            <div class="clean-card">
+              <div class="card-head-title">
+                <h3>Kwaliteit per Gevolgde Opleiding & Partner (Els)</h3>
+                <span class="text-muted">Geaggregeerde feedback van Steevliet begeleiders na voltooide vormingen</span>
+              </div>
+
+              <div class="partner-rows" id="partners-ranking-container">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+
+            <!-- Right: Evaluatie Invullen (Tom) -->
+            <div class="clean-card">
+              <div class="card-head-title">
+                <h3>1-Minuut Terugkoppeling na Gevolgde Vorming</h3>
+                <span class="text-muted">Jouw evaluatie voor: <strong>Omgaan met Weerstand & De-escalatie</strong> (Pimento vzw)</span>
+              </div>
+
+              <form onsubmit="submitCourseEval(event)">
+                <div class="field-item">
+                  <label>Algemene score voor deze vorming & lesgever:</label>
+                  <div class="stars-bar" id="stars-picker">
+                    <span class="star-btn active" onclick="setStarRating(1)">★</span>
+                    <span class="star-btn active" onclick="setStarRating(2)">★</span>
+                    <span class="star-btn active" onclick="setStarRating(3)">★</span>
+                    <span class="star-btn active" onclick="setStarRating(4)">★</span>
+                    <span class="star-btn active" onclick="setStarRating(5)">★</span>
+                    <span class="star-text" id="star-rating-label">5/5 • Zeer waardevol</span>
+                  </div>
+                </div>
+
+                <div class="field-item">
+                  <label>Toepasbaarheid in jouw leefgroep:</label>
+                  <div class="toggle-pills">
+                    <label class="toggle-pill active"><input type="radio" name="practical" value="ja" checked> Concreet toepasbaar</label>
+                    <label class="toggle-pill"><input type="radio" name="practical" value="deels"> Deels bruikbaar</label>
+                    <label class="toggle-pill"><input type="radio" name="practical" value="nee"> Te theoretisch</label>
+                  </div>
+                </div>
+
+                <div class="field-item">
+                  <label>Aanrader voor collega-opvoeders van andere leefgroepen?</label>
+                  <div class="toggle-pills">
+                    <label class="toggle-pill active"><input type="radio" name="recommend" value="ja" checked> Ja, zeker aanraden</label>
+                    <label class="toggle-pill"><input type="radio" name="recommend" value="twijfel"> Twijfelgeval</label>
+                    <label class="toggle-pill"><input type="radio" name="recommend" value="nee"> Niet aanraden</label>
+                  </div>
+                </div>
+
+                <div class="field-item">
+                  <label>Korte toelichting voor Els (Vormingsbeleid):</label>
+                  <textarea class="clean-textarea" rows="2" placeholder="Praktische technieken meteen kunnen toepassen tijdens crisissituaties in Leefgroep De Eik..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                  <span>Verzend Evaluatie naar Els</span>
+                </button>
+              </form>
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- ================= MODALS & APPLICATION SHEETS ================= -->
+
+  <!-- Modal: Opleiding Aanvragen -->
+  <div id="sheet-apply" class="sheet-backdrop">
+    <div class="sheet-modal">
+      <div class="sheet-head">
+        <div>
+          <span class="sheet-kicker">Aanvraagformulier</span>
+          <h3 id="modal-course-title">Opleiding Aanvragen</h3>
+        </div>
+        <button class="btn-close-sheet" onclick="closeModal('sheet-apply')">&times;</button>
+      </div>
+
+      <div class="sheet-body">
+        <div class="applicant-info-strip">
+          <div class="avatar-mini" id="modal-applicant-avatar">T</div>
+          <div>
+            <strong id="modal-applicant-name">Tom De Smet</strong>
+            <span class="text-muted" id="modal-applicant-dept">Pedagogisch Begeleider • Leefgroep De Eik</span>
+          </div>
+        </div>
+
+        <form onsubmit="submitApplication(event)">
+          <input type="hidden" id="apply-course-id">
+
+          <div class="field-item">
+            <label class="bold-label">Wanneer volg je deze opleiding?</label>
+            <div class="shift-cards-container">
+              <label class="shift-card active" id="shift-card-binnen" onclick="selectShiftOption('binnen')">
+                <input type="radio" name="shiftOption" value="binnen" checked>
+                <div>
+                  <strong>Binnen mijn normale werkrooster</strong>
+                  <span class="text-muted">Normale diensttijd (Looncode LC-101)</span>
+                </div>
+              </label>
+
+              <label class="shift-card" id="shift-card-buiten" onclick="selectShiftOption('buiten')">
+                <input type="radio" name="shiftOption" value="buiten">
+                <div>
+                  <strong>Buiten mijn werkrooster (overuren/recup)</strong>
+                  <span class="text-muted">Geldt als compensatie & premie (Looncode LC-204)</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-item">
+              <label class="bold-label">Broodjeslunch gewenst?</label>
+              <select id="apply-lunch" class="clean-select">
+                <option value="Broodje Vlees/Kaas" selected>Broodje Vlees / Kaas</option>
+                <option value="Broodje Vegetarisch">Broodje Vegetarisch</option>
+                <option value="Geen lunch nodig">Geen lunch nodig</option>
+              </select>
+            </div>
+            <div class="field-item">
+              <label class="bold-label">Locatie</label>
+              <select id="apply-location" class="clean-select">
+                <option value="Campus Melle" selected>Campus Melle</option>
+                <option value="Campus St-Maria-Oudenhove">Campus St-Maria-Oudenhove</option>
+                <option value="Externe locatie">Externe locatie</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-item">
+            <label class="bold-label">Korte motivatie voor Sarah (Coördinator)</label>
+            <textarea id="apply-motivation" class="clean-textarea" rows="2" placeholder="Waarom is deze vorming waardevol voor onze leefgroep?"></textarea>
+          </div>
+
+          <div class="sheet-foot">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('sheet-apply')">Annuleren</button>
+            <button type="submit" class="btn btn-primary">Verstuur Aanvraag naar Sarah</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Externe Opleiding Voorstellen -->
+  <div id="sheet-suggest" class="sheet-backdrop">
+    <div class="sheet-modal">
+      <div class="sheet-head">
+        <div>
+          <span class="sheet-kicker">Voorstel</span>
+          <h3>Externe Opleiding Voorstellen</h3>
+        </div>
+        <button class="btn-close-sheet" onclick="closeModal('sheet-suggest')">&times;</button>
+      </div>
+
+      <div class="sheet-body">
+        <p class="text-muted mb-3">Draag zelf een externe studiedag of workshop aan. Els bekijkt of dit aansluit bij het opleidingsplan.</p>
+
+        <form onsubmit="submitSuggestion(event)">
+          <div class="field-item">
+            <label class="bold-label">Titel van de opleiding</label>
+            <input type="text" id="suggest-title" class="clean-input" placeholder="bv. Begeleiden van Jongeren met Hechtingsstoornissen" required>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-item">
+              <label class="bold-label">Partner / Opleider</label>
+              <input type="text" id="suggest-partner" class="clean-input" placeholder="bv. Artevelde Academy" required>
+            </div>
+            <div class="field-item">
+              <label class="bold-label">Functiegroep</label>
+              <select id="suggest-category" class="clean-select">
+                <option value="pedagogisch">Pedagogisch</option>
+                <option value="logistiek">Logistiek</option>
+                <option value="admin">Administratie</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sheet-foot">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('sheet-suggest')">Sluiten</button>
+            <button type="submit" class="btn btn-primary">Voorstel Indienen bij Els</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
